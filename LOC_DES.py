@@ -296,9 +296,9 @@ def main():
 			
 			for f in range(num_feature_each*12):
 				
-				if len(self_batch[i]) > 0:
-					if len(same_batch[i]) > 0:
-						if len(hetero_batch[i]) > 0:
+				if len(self_batch[f]) > 0:
+					if len(same_batch[f]) > 0:
+						if len(hetero_batch[f]) > 0:
 							
 							self_batch_p = [[]]
 							same_batch_p = [[]]
@@ -307,21 +307,21 @@ def main():
 							for g in range(patch_len):
 								self_batch_p[0].append([])
 								for w in range(patch_len):
-									self_batch_p[0][g].append([self_batch[i][g][w]])
+									self_batch_p[0][g].append([self_batch[f][g][w]])
 							
 							full_self_batch_arr.append(self_batch_p)
 							
 							for g in range(patch_len):
 								same_batch_p[0].append([])
 								for w in range(patch_len):
-									same_batch_p[0][g].append([same_batch[i][g][w]])
+									same_batch_p[0][g].append([same_batch[f][g][w]])
 							
 							full_same_batch_arr.append(same_batch_p)
 							
 							for g in range(patch_len):
 								hetero_batch_p[0].append([])
 								for w in range(patch_len):
-									hetero_batch_p[0][g].append([hetero_batch[i][g][w]])
+									hetero_batch_p[0][g].append([hetero_batch[f][g][w]])
 							
 							full_hetero_batch_arr.append(hetero_batch_p)
 							
