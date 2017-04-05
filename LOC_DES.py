@@ -133,11 +133,18 @@ def main():
 	#
 	################################### define a flag to keep mininum ################################
 	
+	# for early version of tensorflow which cannot use tf.norm
+	this_loss = tf.div(1 + tf.exp(tf.scalar_mul(beta, tf.sqrt(tf.reduce_sum(tf.subtract(self_cnn['normalized_6'], same_cnn['normalized_6'])**2)))), tf.multiply(1 + tf.exp(tf.scalar_mul(beta, tf.sqrt(tf.reduce_sum(tf.subtract(self_cnn_vi['normalized_6'], hetero_cnn['normalized_6'])**2)))), 1 + tf.scalar_mul(eps, 1 + tf.exp(tf.scalar_mul(beta, tf.sqrt(tf.reduce_sum(tf.subtract(self_cnn['normalized_6'], same_cnn['normalized_6'])**2)))))))
 	
-	this_loss = tf.div(1 + tf.exp(tf.scalar_mul(beta, tf.norm(tf.subtract(self_cnn['normalized_6'], same_cnn['normalized_6']), ord = 'euclidean'))), tf.multiply(1 + tf.exp(tf.scalar_mul(beta, tf.norm(tf.subtract(self_cnn_vi['normalized_6'], hetero_cnn['normalized_6']), ord = 'euclidean'))), 1 + tf.scalar_mul(eps, 1 + tf.exp(tf.scalar_mul(beta, tf.norm(tf.subtract(self_cnn['normalized_6'], same_cnn['normalized_6']), ord = 'euclidean'))))))
+	flag_same_self_min = tf.sqrt(tf.reduce_sum(tf.subtract(self_cnn['normalized_6'], same_cnn['normalized_6'])**2))
+	flag_hetero_self_min = tf.sqrt(tf.reduce_sum(tf.subtract(self_cnn['normalized_6'], hetero_cnn['normalized_6'])**2))
 	
-	flag_same_self_min = tf.norm(tf.subtract(self_cnn['normalized_6'], same_cnn['normalized_6']), ord = 'euclidean')
-	flag_hetero_self_min = tf.norm(tf.subtract(self_cnn['normalized_6'], hetero_cnn['normalized_6']), ord = 'euclidean')
+	
+	# for current version of tensorflow
+	#this_loss = tf.div(1 + tf.exp(tf.scalar_mul(beta, tf.norm(tf.subtract(self_cnn['normalized_6'], same_cnn['normalized_6']), ord = 'euclidean'))), tf.multiply(1 + tf.exp(tf.scalar_mul(beta, tf.norm(tf.subtract(self_cnn_vi['normalized_6'], hetero_cnn['normalized_6']), ord = 'euclidean'))), 1 + tf.scalar_mul(eps, 1 + tf.exp(tf.scalar_mul(beta, tf.norm(tf.subtract(self_cnn['normalized_6'], same_cnn['normalized_6']), ord = 'euclidean'))))))
+	
+	#flag_same_self_min = tf.norm(tf.subtract(self_cnn['normalized_6'], same_cnn['normalized_6']), ord = 'euclidean')
+	#flag_hetero_self_min = tf.norm(tf.subtract(self_cnn['normalized_6'], hetero_cnn['normalized_6']), ord = 'euclidean')
 	
 	
 	
